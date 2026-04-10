@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Cadastro - ReceitaMaster</title>
-    <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" href="./resources/css/style.css">
 </head>
 <body class="bg-cadastro">
 
@@ -15,17 +15,17 @@
             <form action="cadastrar" method="POST">
                 <div class="input-group">
                     <label>Nome Completo</label>
-                    <input type="text" name="nome" placeholder="Nome Completo" required>
+                    <input type="text" name="cadastro_nome" placeholder="Nome Completo" required>
                 </div>
 
                 <div class="input-group">
                     <label>E-mail</label>
-                    <input type="email" name="email" placeholder="eu@gmail.com" required>
+                    <input type="email" name="cadastro_email" placeholder="eu@gmail.com" required>
                 </div>
 
                 <div class="input-group">
                     <label>Senha</label>
-                    <input type="password" name="senha" placeholder="Crie uma senha forte" required>
+                    <input type="password" name="cadastro_senha" placeholder="Crie uma senha forte" required>
                 </div>
 
                 <button type="submit" class="btn-primary">Finalizar Cadastro</button>
