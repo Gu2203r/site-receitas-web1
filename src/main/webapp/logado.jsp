@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Configurações Pessoais - La Cuisine Brasil</title>
-    <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" href="./resources/css/style.css">
 </head>
 <body class="bg-login"> <nav class="navbar">
         <ul class="nav-links">
@@ -35,23 +35,25 @@
                 </div>
 
                 <div style="flex: 2;">
-                    <div class="input-group">
-                        <label>Nome</label>
-                        <input type="text" value="Laura Silva">
-                    </div>
-                    <div class="input-group">
-                        <label>E-mail</label>
-                        <input type="email" value="laura@gmail.com">
-                    </div>
-                    <div class="input-group">
-                        <label>Nova Senha</label>
-                        <input type="password" placeholder="Deixe em branco para não alterar">
-                    </div>
+                    <form action="logado" method="post">
+                        <div class="input-group">
+                            <label>Nome</label>
+                            <input type="text" name="nome_editavel" value="${usuarioEditavel.getNome()}">
+                        </div>
+                        <div class="input-group">
+                            <label>E-mail</label>
+                            <input type="email" name="email_editavel" value="${usuarioEditavel.getEmail()}">
+                        </div>
+                        <div class="input-group">
+                            <label>Nova Senha</label>
+                            <input type="password" name="senha_editavel" placeholder="Deixe em branco para não alterar">
+                        </div>
 
-                    <div style="display: flex; gap: 10px;">
-                        <button class="btn-primary">Salvar Alterações</button>
-                        <button class="btn-primary" style="background: #c0392b;">Excluir Conta</button>
-                    </div>
+                        <div style="display: flex; gap: 10px;">
+                            <button type="submit" class="btn-primary">Salvar Alterações</button>
+                            <button type="button" class="btn-primary" style="background: #c0392b;" onclick="window.location.href='excluir?idExcluir=${usuarioEditavel.getId()}'">Excluir Conta</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
