@@ -1,10 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>La Cuisine Brasi- Home</title>
-    <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" href="./resources/css/style.css">
 </head>
 <body>
 
@@ -14,7 +15,12 @@
             <li><a href="index.jsp">Início</a></li>
             <li><a href="#">Receitas</a></li>
             <li><a href="#">Sobre</a></li>
-            <li><a href="login.jsp" class="btn-nav-login">Entrar</a></li>
+            <c:if test="${usuarioLogado != null}">
+                <li><a href="logado?id_usuario=${usuarioLogado.getId()}" class="btn-nav-login">${usuarioLogado.getNome()}</a></li>
+            </c:if>
+            <c:if test="${usuarioLogado == null}">
+                <li><a href="login.jsp" class="btn-nav-login">Entrar</a></li>
+            </c:if>
         </ul>
     </nav>
 

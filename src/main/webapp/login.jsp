@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - Receitas</title>
-    <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" href="./resources/css/style.css">
 </head>
 <body class="bg-login">
 
@@ -14,11 +14,11 @@
             <form action="autenticar" method="POST">
                 <div class="input-group">
                     <label>E-mail</label>
-                    <input type="email" name="email" required>
+                    <input type="email" name="email_usuario" required>
                 </div>
                 <div class="input-group">
                     <label>Senha</label>
-                    <input type="password" name="senha" required>
+                    <input type="password" name="senha_usuario" required>
                 </div>
                 <button type="submit" class="btn-primary">Acessar Conta</button>
             </form>
