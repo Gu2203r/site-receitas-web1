@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -25,6 +26,13 @@
 
     <div class="container-auth">
         <div class="auth-card" style="width: 600px;"> <h2>Minha Conta</h2>
+
+            <c:if test="${not empty msgErro}">
+                <div class="message-error">
+                    ${msgErro}
+                </div>
+            </c:if>
+
             <div style="display: flex; gap: 30px; text-align: left;">
 
                 <div style="flex: 1; text-align: center;">

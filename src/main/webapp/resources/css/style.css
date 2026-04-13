@@ -42,6 +42,17 @@
 
 .auth-card h2 { color: #E67E22; margin-bottom: 25px; }
 
+.message-error {
+    background: rgba(192, 57, 43, 0.15);
+    border: 1px solid #c0392b;
+    color: #ffb3aa;
+    padding: 12px 14px;
+    border-radius: 6px;
+    margin-bottom: 18px;
+    font-size: 14px;
+    text-align: left;
+}
+
 .input-group { text-align: left; margin-bottom: 15px; }
 .input-group label { display: block; margin-bottom: 5px; font-size: 14px; }
 .input-group input {

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -11,6 +12,12 @@
     <div class="container-auth">
         <div class="auth-card">
             <h2>Criar Conta</h2>
+
+            <c:if test="${not empty msgRegistro}">
+                <div class="message-error">
+                    ${msgRegistro}
+                </div>
+            </c:if>
 
             <form action="cadastrar" method="POST">
                 <div class="input-group">

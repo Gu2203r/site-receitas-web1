@@ -7,7 +7,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
+
 
 @WebServlet(name = "EditarUsuario", value = "/logado")
 public class EditarUsuario extends HttpServlet {
@@ -45,6 +45,7 @@ public class EditarUsuario extends HttpServlet {
         HashMap<Integer, Usuario> listaUsuarios = (HashMap<Integer, Usuario>) getServletContext().getAttribute("listaUsuarios");
 
         String url = "/index.jsp";
+        String msgErro = null;
 
         String novoNome = request.getParameter("nome_editavel");
         String novoEmail = request.getParameter("email_editavel");
@@ -53,12 +54,15 @@ public class EditarUsuario extends HttpServlet {
         boolean existe = false;
 
         // procura se o email sendo trocado já existe
-        for (Usuario user : listaUsuarios.values()){
-            if (novoEmail.equals(user.getEmail())) {
-                existe = true;
-                url = "/logado.jsp";
-                System.out.println("Já existe um usuário com esse email");
-                break;
+        if (!novoEmail.equals(usuarioEditavel.getEmail())){
+            for (Usuario user : listaUsuarios.values()){
+                if (novoEmail.equals(user.getEmail())) {
+                    existe = true;
+                    url = "/logado.jsp";
+                    msgErro = "Já existe um usuário com esse email";
+                    System.out.println("Já existe um usuário com esse email");
+                    break;
+                }
             }
         }
 
@@ -75,7 +79,7 @@ public class EditarUsuario extends HttpServlet {
                 System.out.println("nova senha: " + novaSenha);
             }
         }
-
+        request.setAttribute("msgErro",msgErro);
         getServletContext().setAttribute("listaUsuarios", listaUsuarios);
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }
