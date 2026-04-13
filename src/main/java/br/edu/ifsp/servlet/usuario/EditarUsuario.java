@@ -44,24 +44,39 @@ public class EditarUsuario extends HttpServlet {
         Usuario usuarioEditavel = (Usuario) getServletContext().getAttribute("usuarioEditavel");
         HashMap<Integer, Usuario> listaUsuarios = (HashMap<Integer, Usuario>) getServletContext().getAttribute("listaUsuarios");
 
+        String url = "/index.jsp";
+
         String novoNome = request.getParameter("nome_editavel");
         String novoEmail = request.getParameter("email_editavel");
         String novaSenha = request.getParameter("senha_editavel");
+
+        boolean existe = false;
+
+        // procura se o email sendo trocado já existe
+        for (Usuario user : listaUsuarios.values()){
+            if (novoEmail.equals(user.getEmail())) {
+                existe = true;
+                url = "/logado.jsp";
+                System.out.println("Já existe um usuário com esse email");
+                break;
+            }
+        }
 
         // pega o usuario pelo ‘id’
         Usuario u = listaUsuarios.get(usuarioEditavel.getId());
 
         // verifica se existe e muda as informações
-        if (u != null){
+        if (!existe && u != null){
             u.setNome(novoNome);
             u.setEmail(novoEmail);
             // caso o usuario nao trocar a senha
-            if (novaSenha != null){
+            if (!novaSenha.isEmpty()){
                 u.setSenha(novaSenha);
+                System.out.println("nova senha: " + novaSenha);
             }
         }
 
         getServletContext().setAttribute("listaUsuarios", listaUsuarios);
-        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 }
