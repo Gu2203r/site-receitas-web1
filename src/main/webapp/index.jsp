@@ -4,8 +4,8 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>La Cuisine Brasi- Home</title>
-    <link rel="stylesheet" href="./resources/css/style.css">
+    <title>La Cuisine Brasil- Home</title>
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 </head>
 <body>
 
@@ -13,8 +13,8 @@
         <div class="logo">La Cuisine Brasil</div>
         <ul class="nav-links">
             <li><a href="index.jsp">Início</a></li>
-            <li><a href="#">Receitas</a></li>
-            <li><a href="#">Sobre</a></li>
+            <li><a href="receitas.jsp">Receitas</a></li>
+            <li><a href="sobre.jsp">Sobre</a></li>
             <c:if test="${usuarioLogado != null}">
                 <li><a href="logado?id_usuario=${usuarioLogado.getId()}" class="btn-nav-login">${usuarioLogado.getNome()}</a></li>
             </c:if>
@@ -61,10 +61,7 @@
             </div>
         </section>
 
-        <section class="container bg-light">
-            <h2 class="section-title">Novidades & Populares</h2>
-            <p style="text-align: center; color: #555;">Confira o que acabou de sair do forno e as receitas mais amadas pela comunidade.</p>
-            </section>
+
             <section class="container bg-light">
                     <h2 class="section-title">Novidades da Semana</h2>
                     <div class="novidades-row">
@@ -74,8 +71,8 @@
                         </div>
                         <div class="novidade-texto">
                             <h3>Pizza Artesanal de Fermentação Natural</h3>
-                            <p>Descubra como fazer a massa perfeita que descansa por 24 horas. O resultado é uma leveza incomparável e bordas crocantes.</p>
-                            <a href="#" class="btn-primary" style="width: auto;">Ler Passo a Passo</a>
+                            <p>Descubra como fazer a massa perfeita que descansa por 24 horas. O resultado é uma leveza incomparável e bordas crocantes.</p><br>
+                            <a href="receitas.jsp" class="btn-primary" style="width: auto;">Ler Passo a Passo</a>
                         </div>
                     </div>
                 </section>
@@ -108,7 +105,7 @@
                 </section>
 
     <footer style="background: #2b1506; color: white; text-align: center; padding: 40px 0; margin-top: 50px;">
-        <p>&copy; 2026 La Cuisine Brasi - Todos os direitos reservados.</p>
+        <p>&copy; 2026 La Cuisine Brasil - Todos os direitos reservados.</p>
         <p style="font-size: 12px; color: #888; margin-top: 10px;">Feito por Gustavo e Laura</p>
     </footer>
 

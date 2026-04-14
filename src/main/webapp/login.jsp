@@ -4,12 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - Receitas</title>
-    <link rel="stylesheet" href="./resources/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 </head>
 <body class="bg-login">
 
     <div class="container-auth">
         <div class="auth-card">
+        <div class="header-auth-card">
+
+        </div>
             <h2>Entrar</h2>
             <form action="autenticar" method="POST">
                 <div class="input-group">
@@ -25,6 +28,11 @@
             <p style="margin-top:20px; font-size:14px;">
                 Novo por aqui? <a href="cadastro.jsp" style="color:#E67E22; text-decoration:none;">Cadastre-se</a>
             </p>
+
+             <a href="index.jsp" class="btn-voltar">
+                <span class="icon-seta">←</span>
+                <span>Voltar para a Home</span>
+             </a>
         </div>
     </div>
 

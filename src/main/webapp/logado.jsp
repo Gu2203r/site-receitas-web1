@@ -5,15 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Configurações Pessoais - La Cuisine Brasil</title>
-    <link rel="stylesheet" href="./resources/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 </head>
 <body class="bg-login"> <nav class="navbar">
         <ul class="nav-links">
             <li><a href="index.jsp">Home</a></li>
-            <li><a href="login.jsp">Login</a></li>
-            <li><a href="#">Adicionar receitas</a></li>
+            <li><a href="adicionar.jsp">Adicionar receitas</a></li>
             <li><a href="perfil.jsp">Configurações pessoais</a></li>
-            <li><a href="#">Visualizar receitas</a></li>
+            <li><a href="visualizar.jsp">Visualizar receitas</a></li>
         </ul>
         <div class="search-container">
             <input type="text" placeholder="Pesquisar">
@@ -60,7 +59,11 @@
                         <div style="display: flex; gap: 10px;">
                             <button type="submit" class="btn-primary">Salvar Alterações</button>
                             <button type="button" class="btn-primary" style="background: #c0392b;" onclick="window.location.href='excluir?idExcluir=${usuarioEditavel.getId()}'">Excluir Conta</button>
-                        </div>
+                        </div><br>
+                        <a href="index.jsp" class="btn-voltar">
+                             <span class="icon-seta">←</span>
+                             <span>Voltar para a Home</span>
+                        </a>
                     </form>
                 </div>
             </div>
@@ -68,7 +71,7 @@
     </div>
 
     <footer style="background: #2b1506; color: white; text-align: center; padding: 40px 0; margin-top: 50px;">
-        <p>&copy; 2026 La Cuisine Brasi - Todos os direitos reservados.</p>
+        <p>&copy; 2026 La Cuisine Brasil - Todos os direitos reservados.</p>
         <p style="font-size: 12px; color: #888; margin-top: 10px;">Feito por Gustavo e Laura</p>
     </footer>
 

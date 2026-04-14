@@ -22,6 +22,13 @@
                    url('../images/fundoinicial.png') no-repeat center center/cover;
 }
 
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
 .container-auth {
     height: 100vh;
     display: flex;
@@ -84,15 +91,16 @@
      display: flex;
      justify-content: space-between;
      align-items: center;
-     padding: 10px 5%;
+     padding: 10px 20px;
      background: #2b1506;
      border-bottom: 2px solid #E67E22;
+     width : 100%;
  }
 
  .nav-links {
      display: flex;
      list-style: none;
-     gap: 15px; /* Diminuí o espaço para caber tudo */
+     gap: 15px;
      align-items: center;
  }
 
@@ -101,23 +109,24 @@
      text-decoration: none;
      font-size: 14px;
      transition: 0.3s;
-     white-space: nowrap; /* Impede que o texto quebre linha */
+     white-space: nowrap;
  }
 
  .search-container {
-     flex-grow: 1;
-     margin: 0 30px;
-     max-width: 400px;
-     position: relative;
+     flex: 1;
+     margin: 0 20px;
+     max-width: 300px;
+     min-width: 0px;
  }
 
  .search-container input {
      width: 100%;
      padding: 8px 40px 8px 20px;
-     border-radius: 20px; /* Bem arredondada */
+     border-radius: 20px;
      border: none;
      background: #E67E22;
      color: white;
+     box-sizing: border-box;
  }
 
  .search-container input::placeholder { color: rgba(255,255,255,0.8); }
@@ -133,9 +142,14 @@
  .logo { font-size: 1.5rem; font-weight: bold; }
  .logo span { color: #E67E22; }
 
- .nav-links { display: flex; list-style: none; gap: 30px; align-items: center; }
- .nav-links a { color: white; text-decoration: none; transition: 0.3s; }
- .nav-links a:hover { color: #E67E22; }
+ .nav-links a {
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+   }
+ .nav-links a:hover {
+    color: #E67E22;
+     }
 
  .btn-nav-login {
      background: #E67E22;
@@ -298,12 +312,310 @@
      position: relative;
  }
 
- body {
-     min-height: 100vh;
-     display: flex;
-     flex-direction: column;
- }
-
  .container-auth {
      flex-grow: 1;
  }
+
+ .row-group {
+     display: flex;
+     gap: 20px;
+     width: 100%;
+ }
+
+ .custom-field {
+     width: 100%;
+     padding: 12px;
+     border-radius: 5px;
+     background: #3d1a06;
+     color: white;
+     border: 1px solid #4d260a;
+     font-size: 14px;
+     outline: none;
+     transition: 0.3s;
+ }
+
+ .custom-field:focus {
+     border-color: #E67E22;
+ }
+
+ .textarea {
+     resize: vertical;
+     font-family: inherit;
+ }
+
+ .custom-field::placeholder {
+     color: #a8a8a8;
+ }
+
+ .table-container {
+     background: white;
+     border-radius: 10px;
+     overflow: hidden;
+     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+ }
+
+ .recipe-table {
+     width: 100%;
+     border-collapse: collapse;
+     table-layout: fixed;
+ }
+
+ .recipe-table th {
+     background: #2b1506;
+     color: white;
+     padding: 18px;
+     font-weight: 500;
+ }
+
+ .recipe-table td {
+     padding: 15px 18px;
+     border-bottom: 1px solid #eee;
+     color: #444;
+ }
+
+ .actions-cell {
+     text-align: center;
+     display: flex;
+     justify-content: center;
+     gap: 15px;
+ }
+
+ .btn-edit {
+     background: none;
+     border: none;
+     color: #E67E22;
+     font-weight: bold;
+     cursor: pointer;
+     transition: 0.3s;
+ }
+
+ .btn-edit:hover { color: #d35400; text-decoration: underline; }
+
+ .btn-delete {
+     background: none;
+     border: none;
+     color: #c0392b;
+     font-weight: bold;
+     cursor: pointer;
+     transition: 0.3s;
+ }
+
+ .btn-delete:hover { color: #a93226; text-decoration: underline; }
+
+/* Container para alinhar o botão à esquerda no topo do card */
+.header-auth-card {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start; /* Alinha à esquerda */
+    margin-bottom: 25px; /* Espaço para o título <h2> abaixo */
+}
+
+/* O Botão Premium de Voltar */
+.btn-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px; /* Espaço entre o ícone e o texto */
+
+    /* Cores e Bordas - Estilo "Ghost" */
+    background: transparent;
+    border: 2px solid #E67E22; /* Laranja vibrante */
+    color: #E67E22; /* Texto Laranja */
+
+    /* Formato e Espaçamento */
+    padding: 8px 18px;
+    border-radius: 50px; /* Bem arredondado (estilo pílula) */
+
+    /* Tipografia */
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase; /* Letras maiúsculas para dar imponência */
+    letter-spacing: 1px; /* Espaçamento entre letras elegante */
+
+    /* Animação Suave */
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(230, 126, 34, 0.1); /* Sombra laranja bem leve */
+}
+
+/* O Ícone da Seta */
+.btn-voltar .icon-seta {
+    font-size: 18px;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+/* --- EFEITO DE HOVER (Mágica do Front-end) --- */
+.btn-voltar:hover {
+    background-color: #E67E22; /* Preenche com laranja */
+    color: white; /* Texto vira branco */
+    box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3); /* Sombra laranja mais forte */
+    transform: translateY(-2px); /* Eleva o botão levemente */
+}
+
+/* Efeito na seta ao passar o mouse */
+.btn-voltar:hover .icon-seta {
+    transform: translateX(-4px); /* A seta "empurra" para a esquerda */
+}
+
+
+
+.sobre-wrapper {
+    max-width: 850px;
+    margin: 60px auto;
+    text-align: center;
+}
+
+.sobre-texto {
+    font-size: 36px;
+    color: #2b1506;
+    margin-bottom: 25px;
+}
+
+.sobre-texto p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+.sobre-cards-info {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.info-item {
+    text-align: left;
+    flex: 1;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    border-top: 5px solid #d35400;
+}
+
+.info-item h4 {
+    color: #2b1506;
+    margin: 10px 0;
+}
+
+.info-item p {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+.info-icon {
+    font-size: 1.5rem;
+}
+
+.sobre-imagem {
+    flex: 1;
+    min-width: 300px;
+}
+
+.img-sobre {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+    .sobre-cards-info {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- Página de Detalhes da Receita --- */
+.receita-detalhe {
+    background: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.receita-header {
+    text-align: center;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+}
+
+.recipe-title {
+    font-size: 42px;
+    color: #2b1506;
+    margin-bottom: 15px;
+}
+
+.recipe-meta {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    font-weight: 600;
+    color: #d35400;
+}
+
+.recipe-content {
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.recipe-ingredients {
+    flex: 1;
+    min-width: 250px;
+    background: #fdfaf8;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+.recipe-ingredients h3, .recipe-steps h3 {
+    color: #2b1506;
+    margin-bottom: 20px;
+    border-left: 5px solid #d35400;
+    padding-left: 15px;
+}
+
+.recipe-ingredients ul {
+    list-style: none;
+}
+
+.recipe-ingredients li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    color: #555;
+}
+
+.recipe-steps {
+    flex: 2;
+    min-width: 350px;
+}
+
+.steps-text {
+    line-height: 1.8;
+    color: #444;
+    font-size: 17px;
+}
+
+.recipe-actions {
+    margin-top: 40px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 2px solid #2b1506;
+    color: #2b1506;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-secondary:hover {
+    background: #2b1506;
+    color: #fff;
+}
