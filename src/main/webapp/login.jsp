@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -14,6 +15,13 @@
 
         </div>
             <h2>Entrar</h2>
+
+            <c:if test="${not empty msg}">
+                <div class="message-error">
+                    ${msg}
+                </div>
+            </c:if>
+
             <form action="autenticar" method="POST">
                 <div class="input-group">
                     <label>E-mail</label>

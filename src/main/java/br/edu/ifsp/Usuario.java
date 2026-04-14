@@ -1,6 +1,10 @@
 package br.edu.ifsp;
 
-public abstract class Usuario {
+import java.io.Serializable;
+
+public abstract class Usuario implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private static int idAtual = 0;
 
     private int id;
@@ -15,6 +19,10 @@ public abstract class Usuario {
         this.senha = senha;
         this.email = email;
         this.tipo = tipo;
+    }
+
+    public static void setIdAtual(int idAtual) {
+        Usuario.idAtual = idAtual;
     }
 
     public int getId() {
@@ -47,5 +55,10 @@ public abstract class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    @Override
+    public String toString() {
+        return "id: " + id + "\nnome: " + nome;
     }
 }

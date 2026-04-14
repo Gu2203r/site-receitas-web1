@@ -4,17 +4,21 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>La Cuisine Brasil- Home</title>
-   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+    <title>La Cuisine Brasi- Home</title>
+    <link rel="stylesheet" href="./resources/css/style.css">
 </head>
 <body>
+
+    <jsp:useBean id="gerenciadorReceita" class="br.edu.ifsp.utils.GerenciadorReceita" scope="page" />
+    <c:set var="receitasOrdenadas" value="${gerenciadorReceita.buscarReceitasMelhorAvaliadas(applicationScope.listaReceitas)}" />
+    <c:set var="ultimaReceita" value="${gerenciadorReceita.buscarUltimaReceitaAdicionada(applicationScope.listaReceitas)}" />
 
     <nav class="navbar">
         <div class="logo">La Cuisine Brasil</div>
         <ul class="nav-links">
             <li><a href="index.jsp">Início</a></li>
-            <li><a href="receitas.jsp">Receitas</a></li>
-            <li><a href="sobre.jsp">Sobre</a></li>
+            <li><a href="#">Receitas</a></li>
+            <li><a href="#">Sobre</a></li>
             <c:if test="${usuarioLogado != null}">
                 <li><a href="logado?id_usuario=${usuarioLogado.getId()}" class="btn-nav-login">${usuarioLogado.getNome()}</a></li>
             </c:if>
@@ -34,47 +38,58 @@
     <section class="container">
             <h2 class="section-title">Receitas em Destaque</h2>
             <div class="recipe-grid">
-                <div class="recipe-card">
-                    <div class="card-image" style="background-image: url('resources/images/fundochurrasco.png');"></div>
-                    <div class="card-info">
-                        <h3>Churrasco Premium</h3>
-                        <p>O segredo do ponto perfeito para o seu final de semana.</p>
-                        <a href="#" class="btn-link">Ver Receita</a>
+                <c:forEach var="receita" items="${receitasOrdenadas}" begin="0" end="2" varStatus="status">
+                    <div class="recipe-card">
+                        <div class="card-image" style="background-image: url('${pageContext.request.contextPath}/imagem?nome=${receita.getFoto()}');"></div>
+                        <div class="card-info">
+                            <h3>${receita.nome}</h3>
+                            <p>${receita.categoria.categoria} - ${receita.tempoPreparo}</p>
+                            <a href="#" class="btn-link">Ver Receita</a>
+                        </div>
                     </div>
-                </div>
-                <div class="recipe-card">
-                    <div class="card-image" style="background-image: url('resources/images/fundopizza.png');"></div>
-                    <div class="card-info">
-                        <h3>Pizza Artesanal</h3>
-                        <p>Massa leve e crocante feita direto na sua pedra ou forno.</p>
-                        <a href="#" class="btn-link">Ver Receita</a>
+                </c:forEach>
+
+                <c:if test="${empty receitasOrdenadas}">
+                    <div class="recipe-card">
+                        <div class="card-image" style="background-image: url('resources/images/fundoinicial.png');"></div>
+                        <div class="card-info">
+                            <h3>Nenhuma receita cadastrada</h3>
+                            <p>Assim que novas receitas forem cadastradas, elas aparecerao aqui.</p>
+                            <a href="cadastroReceita.jsp" class="btn-link">Cadastrar Receita</a>
+                        </div>
                     </div>
-                </div>
-                <div class="recipe-card">
-                    <div class="card-image" style="background-image: url('resources/images/fundobolo.png');"></div>
-                    <div class="card-info">
-                        <h3>Bolo de Chocolate</h3>
-                        <p>Fofinho e com uma cobertura de dar água na boca.</p>
-                        <a href="#" class="btn-link">Ver Receita</a>
-                    </div>
-                </div>
+                </c:if>
             </div>
         </section>
-
-
             <section class="container bg-light">
                     <h2 class="section-title">Novidades da Semana</h2>
-                    <div class="novidades-row">
-                        <div class="novidade-banner">
-                            <img src="resources/images/fundopizza.png" alt="Pizza">
-                            <div class="novidade-tag">NOVO</div>
+                    <c:if test="${not empty ultimaReceita}">
+                        <div class="novidades-row">
+                            <div class="novidade-banner">
+                                <img src="${pageContext.request.contextPath}/imagem?nome=${ultimaReceita.foto}" alt="${ultimaReceita.nome}">
+                                <div class="novidade-tag">NOVO</div>
+                            </div>
+                            <div class="novidade-texto">
+                                <h3>${ultimaReceita.nome}</h3>
+                                <p>${ultimaReceita.categoria.categoria} - ${ultimaReceita.tempoPreparo}</p><br>
+                                <a href="receitas.jsp" class="btn-primary" style="width: auto;">Ler Passo a Passo</a>
+                            </div>
                         </div>
-                        <div class="novidade-texto">
-                            <h3>Pizza Artesanal de Fermentação Natural</h3>
-                            <p>Descubra como fazer a massa perfeita que descansa por 24 horas. O resultado é uma leveza incomparável e bordas crocantes.</p><br>
-                            <a href="receitas.jsp" class="btn-primary" style="width: auto;">Ler Passo a Passo</a>
+                    </c:if>
+
+                    <c:if test="${empty ultimaReceita}">
+                        <div class="novidades-row">
+                            <div class="novidade-banner">
+                                <img src="resources/images/fundopizza.png" alt="Sem novidades">
+                                <div class="novidade-tag">NOVO</div>
+                            </div>
+                            <div class="novidade-texto">
+                                <h3>Nenhuma receita nova ainda</h3>
+                                <p>Cadastre uma nova receita para ela aparecer nesta seção.</p>
+                                <a href="cadastroReceita.jsp" class="btn-primary" style="width: auto;">Cadastrar Receita</a>
+                            </div>
                         </div>
-                    </div>
+                    </c:if>
                 </section>
 
                 <section class="container">
@@ -105,7 +120,7 @@
                 </section>
 
     <footer style="background: #2b1506; color: white; text-align: center; padding: 40px 0; margin-top: 50px;">
-        <p>&copy; 2026 La Cuisine Brasil - Todos os direitos reservados.</p>
+        <p>&copy; 2026 La Cuisine Brasi - Todos os direitos reservados.</p>
         <p style="font-size: 12px; color: #888; margin-top: 10px;">Feito por Gustavo e Laura</p>
     </footer>
 

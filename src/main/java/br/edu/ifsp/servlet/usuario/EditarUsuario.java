@@ -1,6 +1,9 @@
 package br.edu.ifsp.servlet.usuario;
 
 import br.edu.ifsp.Usuario;
+import br.edu.ifsp.entities.Visitante;
+import br.edu.ifsp.utils.GerenciadorArquivo;
+import br.edu.ifsp.utils.GerenciadorUsuario;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -11,6 +14,9 @@ import java.util.HashMap;
 
 @WebServlet(name = "EditarUsuario", value = "/logado")
 public class EditarUsuario extends HttpServlet {
+
+    GerenciadorUsuario gerenciadorUsuario = new GerenciadorUsuario();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Usuario usuarioEditavel;
@@ -31,7 +37,7 @@ public class EditarUsuario extends HttpServlet {
         }
 
         // verifica se o usuario existe ou se esta tentando editar informações de outro
-        if (usuarioEditavel == null || !usuarioEditavel.equals(usuarioLogado)){
+        if (usuarioEditavel == null || usuarioEditavel.getId() != usuarioLogado.getId()){
             url = "/index.jsp";
         }
 
@@ -43,6 +49,7 @@ public class EditarUsuario extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Usuario usuarioEditavel = (Usuario) getServletContext().getAttribute("usuarioEditavel");
         HashMap<Integer, Usuario> listaUsuarios = (HashMap<Integer, Usuario>) getServletContext().getAttribute("listaUsuarios");
+        GerenciadorArquivo gerenciador = new GerenciadorArquivo();
 
         String url = "/index.jsp";
         String msgErro = null;
@@ -55,29 +62,17 @@ public class EditarUsuario extends HttpServlet {
 
         // procura se o email sendo trocado já existe
         if (!novoEmail.equals(usuarioEditavel.getEmail())){
-            for (Usuario user : listaUsuarios.values()){
-                if (novoEmail.equals(user.getEmail())) {
-                    existe = true;
-                    url = "/logado.jsp";
-                    msgErro = "Já existe um usuário com esse email";
-                    System.out.println("Já existe um usuário com esse email");
-                    break;
-                }
+            if (gerenciadorUsuario.verificarEmail(listaUsuarios, novoEmail)) {
+                existe = true;
+                url = "/logado.jsp";
+                msgErro = "Já existe um usuário com esse email";
+                System.out.println("Já existe um usuário com esse email");
             }
         }
 
-        // pega o usuario pelo ‘id’
-        Usuario u = listaUsuarios.get(usuarioEditavel.getId());
-
         // verifica se existe e muda as informações
-        if (!existe && u != null){
-            u.setNome(novoNome);
-            u.setEmail(novoEmail);
-            // caso o usuario nao trocar a senha
-            if (!novaSenha.isEmpty()){
-                u.setSenha(novaSenha);
-                System.out.println("nova senha: " + novaSenha);
-            }
+        if (!existe){
+           gerenciadorUsuario.editar(listaUsuarios, usuarioEditavel.getId(), novoNome, novoEmail, novaSenha);
         }
         request.setAttribute("msgErro",msgErro);
         getServletContext().setAttribute("listaUsuarios", listaUsuarios);

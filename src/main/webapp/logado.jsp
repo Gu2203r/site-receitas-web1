@@ -34,13 +34,6 @@
 
             <div style="display: flex; gap: 30px; text-align: left;">
 
-                <div style="flex: 1; text-align: center;">
-                    <div style="width: 120px; height: 120px; background: #E67E22; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 3rem;">
-                        👤
-                    </div>
-                    <button class="btn-link" style="color: #E67E22; cursor: pointer;">Alterar Foto</button>
-                </div>
-
                 <div style="flex: 2;">
                     <form action="logado" method="post">
                         <div class="input-group">
