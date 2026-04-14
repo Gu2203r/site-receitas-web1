@@ -7,7 +7,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
+
 
 @WebServlet(name = "EditarUsuario", value = "/logado")
 public class EditarUsuario extends HttpServlet {
@@ -44,24 +44,43 @@ public class EditarUsuario extends HttpServlet {
         Usuario usuarioEditavel = (Usuario) getServletContext().getAttribute("usuarioEditavel");
         HashMap<Integer, Usuario> listaUsuarios = (HashMap<Integer, Usuario>) getServletContext().getAttribute("listaUsuarios");
 
+        String url = "/index.jsp";
+        String msgErro = null;
+
         String novoNome = request.getParameter("nome_editavel");
         String novoEmail = request.getParameter("email_editavel");
         String novaSenha = request.getParameter("senha_editavel");
+
+        boolean existe = false;
+
+        // procura se o email sendo trocado já existe
+        if (!novoEmail.equals(usuarioEditavel.getEmail())){
+            for (Usuario user : listaUsuarios.values()){
+                if (novoEmail.equals(user.getEmail())) {
+                    existe = true;
+                    url = "/logado.jsp";
+                    msgErro = "Já existe um usuário com esse email";
+                    System.out.println("Já existe um usuário com esse email");
+                    break;
+                }
+            }
+        }
 
         // pega o usuario pelo ‘id’
         Usuario u = listaUsuarios.get(usuarioEditavel.getId());
 
         // verifica se existe e muda as informações
-        if (u != null){
+        if (!existe && u != null){
             u.setNome(novoNome);
             u.setEmail(novoEmail);
             // caso o usuario nao trocar a senha
-            if (novaSenha != null){
+            if (!novaSenha.isEmpty()){
                 u.setSenha(novaSenha);
+                System.out.println("nova senha: " + novaSenha);
             }
         }
-
+        request.setAttribute("msgErro",msgErro);
         getServletContext().setAttribute("listaUsuarios", listaUsuarios);
-        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 }

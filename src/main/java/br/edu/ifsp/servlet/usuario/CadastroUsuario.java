@@ -10,7 +10,6 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @WebServlet(name = "registroUsuario", value = "/cadastrar")
@@ -43,18 +42,23 @@ public class CadastroUsuario extends HttpServlet {
             }
         }
 
-        // verifica o tipo do usuario (administrador ou visitante)
-        if (tipoUsuario == null || tipoUsuario.equals("COMUM")){
-            tipoUsuario = "COMUN";
-            usuarioCriado = new Administrador(nome, senha, email, tipoUsuario);
-        }else {
+        // cadastra o usuario caso ele nao exista
+        if (msgRegistro == null){
 
-            usuarioCriado = new Visitante(nome, senha, email, tipoUsuario);
+            // verifica o tipo do usuario (administrador ou visitante)
+            if (tipoUsuario == null || tipoUsuario.equals("COMUM")){
+                tipoUsuario = "COMUN";
+                usuarioCriado = new Administrador(nome, senha, email, tipoUsuario);
+            }else {
+                usuarioCriado = new Visitante(nome, senha, email, tipoUsuario);
+            }
+
+            listaUsuarios.put(usuarioCriado.getId(), usuarioCriado);
+            System.out.println("Usuario " + nome + " cadastrado com sucesso");
+
+            getServletContext().setAttribute("listaUsuarios", listaUsuarios);
+
         }
-
-        listaUsuarios.put(usuarioCriado.getId(), usuarioCriado);
-
-        getServletContext().setAttribute("listaUsuarios", listaUsuarios);
 
         // mensagem caso o usuario já exista
         request.setAttribute("msgRegistro", msgRegistro);
@@ -71,6 +75,13 @@ public class CadastroUsuario extends HttpServlet {
 
         if ( !(o instanceof ArrayList)) {
             Map<Integer, Usuario> listaUsuarios = new HashMap<>();
+            getServletContext().setAttribute("listaUsuarios", listaUsuarios);
+
+            // usuario padrao de administrador
+            Usuario usuarioPadrao = new Administrador("admin", "admin", "admin@gmail.com", "ADMIN");
+
+            listaUsuarios.put(usuarioPadrao.getId(), usuarioPadrao);
+
             getServletContext().setAttribute("listaUsuarios", listaUsuarios);
         }
     }

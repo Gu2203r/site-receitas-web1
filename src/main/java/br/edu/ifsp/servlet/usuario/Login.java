@@ -65,17 +65,19 @@ public class Login extends HttpServlet {
         if ( !(o instanceof HashMap)){
             listaUsuarios = new HashMap<>();
 
+            // usuario padrao de administrador
+            Usuario usuarioPadrao = new Administrador("admin", "admin", "admin@gmail.com", "ADMIN");
+
+            listaUsuarios.put(usuarioPadrao.getId(), usuarioPadrao);
+
+            getServletContext().setAttribute("listaUsuarios", listaUsuarios);
+
         }else {
             listaUsuarios = (HashMap<Integer, Usuario>) getServletContext().getAttribute("listaUsuarios");
             System.out.println("lista existente");
         }
 
-        // usuario padrao de administrador
-        Usuario usuarioPadrao = new Administrador("admin", "admin", "admin@gmail.com", "ADMIN");
 
-        listaUsuarios.put(usuarioPadrao.getId(), usuarioPadrao);
-
-        getServletContext().setAttribute("listaUsuarios", listaUsuarios);
 
     }
 }
