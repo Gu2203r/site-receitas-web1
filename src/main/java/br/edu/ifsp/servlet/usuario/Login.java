@@ -1,15 +1,12 @@
 package br.edu.ifsp.servlet.usuario;
 
-import br.edu.ifsp.entities.Administrador;
 import br.edu.ifsp.Usuario;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @WebServlet(name = "Login", value = "/autenticar")
@@ -55,29 +52,4 @@ public class Login extends HttpServlet {
 
     }
 
-    @Override
-    public void init() throws ServletException {
-        super.init();
-
-        Object o = getServletContext().getAttribute("listaUsuarios");
-        Map<Integer, Usuario> listaUsuarios;
-
-        if ( !(o instanceof HashMap)){
-            listaUsuarios = new HashMap<>();
-
-            // usuario padrao de administrador
-            Usuario usuarioPadrao = new Administrador("admin", "admin", "admin@gmail.com", "ADMIN");
-
-            listaUsuarios.put(usuarioPadrao.getId(), usuarioPadrao);
-
-            getServletContext().setAttribute("listaUsuarios", listaUsuarios);
-
-        }else {
-            listaUsuarios = (HashMap<Integer, Usuario>) getServletContext().getAttribute("listaUsuarios");
-            System.out.println("lista existente");
-        }
-
-
-
-    }
 }
