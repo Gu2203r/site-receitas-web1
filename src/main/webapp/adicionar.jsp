@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -23,43 +24,58 @@
 
         <ul class="nav-links">
             <li><a href="#">Sobre o sistema</a></li>
+            <c:if test="${usuarioLogado != null}">
+                <li><a href="logado?id_usuario=${usuarioLogado.getId()}" class="btn-nav-login">${usuarioLogado.getNome()}</a></li>
+                <li><a href="logout" class="btn-nav-logout">Sair</a></li>
+            </c:if>
+            <c:if test="${usuarioLogado == null}">
+                <li><a href="login.jsp" class="btn-nav-login">Entrar</a></li>
+            </c:if>
         </ul>
     </nav>
 
     <div class="container-auth">
         <div class="auth-card" style="width: 700px; margin-top: 50px;">
             <h2>Compartilhar Nova Receita</h2>
-            <form action="index.jsp" method="POST">
+            <form action="${pageContext.request.contextPath}/salvarReceita" method="POST" enctype="multipart/form-data">
 
                 <div class="input-group">
                     <label>Título da Receita</label>
-                    <input type="text" placeholder="Ex: Bolo de chocolate" required>
+                    <input type="text" name="nome" placeholder="Ex: Bolo de chocolate" required>
                 </div>
 
                 <div class="row-group">
                     <div class="input-group" style="flex: 1;">
                         <label>Categoria</label>
-                        <select class="custom-field"required>
-                            <option>Doces</option>
-                            <option>Carnes</option>
-                            <option>Massas</option>
-                            <option>Vegano</option>
+                        <select class="custom-field" name="categoria" required>
+                            <option value="ENTRADA">Entrada</option>
+                            <option value="PRATO_PRINCIPAL">Prato Principal</option>
+                            <option value="SOBREMESA">Sobremesa</option>
                         </select>
                     </div>
                     <div class="input-group" style="flex: 1;">
                         <label>Tempo de Preparo (min)</label>
-                        <input type="number" name="tempo" placeholder="Ex: 45" min="1" required>
+                        <input type="number" name="tempo_preparo" placeholder="Ex: 45" min="1" required>
+                    </div>
+                    <div class="input-group" style="flex: 1;">
+                        <label>Rendimento</label>
+                        <input type="text" name="rendimento" placeholder="Ex: 8 porcoes" required>
                     </div>
                 </div>
 
                 <div class="input-group">
                     <label>Ingredientes</label>
-                    <textarea class="custom-field textarea" rows="5" placeholder="Liste os ingredientes um por linha..."required></textarea>
+                    <textarea class="custom-field textarea" name="ingredientes" rows="5" placeholder="Liste os ingredientes um por linha..." required></textarea>
                 </div>
 
                 <div class="input-group">
                     <label>Modo de Preparo</label>
-                    <textarea class="custom-field textarea" rows="5" placeholder="Passo 1, Passo 2..."required></textarea>
+                    <textarea class="custom-field textarea" name="modo_preparo" rows="5" placeholder="Passo 1, Passo 2..." required></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label>Foto da Receita</label>
+                    <input type="file" name="foto" accept="image/*" class="custom-field" required>
                 </div>
 
                 <button type="submit" class="btn-primary">Publicar Receita</button>

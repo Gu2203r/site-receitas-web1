@@ -13,7 +13,7 @@
         <div class="logo">La Cuisine <span>Brasil</span></div>
         <ul class="nav-links">
             <li><a href="index.jsp">Início</a></li>
-            <li><a href="visualizar.jsp">Receitas</a></li>
+            <li><a href="receitasCadastradas.jsp">Receitas</a></li>
             <li><a href="sobre.jsp">Sobre</a></li>
             <li><a href="login.jsp" class="btn-nav-login">Entrar</a></li>
         </ul>

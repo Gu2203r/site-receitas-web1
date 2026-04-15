@@ -12,15 +12,19 @@
     <jsp:useBean id="gerenciadorReceita" class="br.edu.ifsp.utils.GerenciadorReceita" scope="page" />
     <c:set var="receitasOrdenadas" value="${gerenciadorReceita.buscarReceitasMelhorAvaliadas(applicationScope.listaReceitas)}" />
     <c:set var="ultimaReceita" value="${gerenciadorReceita.buscarUltimaReceitaAdicionada(applicationScope.listaReceitas)}" />
+    <c:set var="receitasMaisVisualizadas" value="${gerenciadorReceita.buscarReceitasMaisVisualizadas(applicationScope.listaReceitas)}" />
 
     <nav class="navbar">
         <div class="logo">La Cuisine Brasil</div>
         <ul class="nav-links">
             <li><a href="index.jsp">Início</a></li>
-            <li><a href="receitas.jsp">Receitas</a></li>
+            <li><a href="receitasCadastradas.jsp">Receitas</a>
             <li><a href="sobre.jsp">Sobre</a></li>
             <c:if test="${usuarioLogado != null}">
+                <li><a href="adicionar.jsp">Cadastrar Receita</a></li>
+                <li><a href="visualizar.jsp">Minhas Receitas</a></li>
                 <li><a href="logado?id_usuario=${usuarioLogado.getId()}" class="btn-nav-login">${usuarioLogado.getNome()}</a></li>
+                <li><a href="logout" class="btn-nav-logout">Sair</a></li>
             </c:if>
             <c:if test="${usuarioLogado == null}">
                 <li><a href="login.jsp" class="btn-nav-login">Entrar</a></li>
@@ -32,7 +36,14 @@
         <div class="hero-text">
             <h1>Cozinhar é uma arte que se compartilha.</h1>
             <p>Descubra as melhores receitas selecionadas por especialistas.</p>
+            <c:if test="${usuarioLogado != null}">
+                <a href="adicionar.jsp" class="btn-primary" style="width: auto; padding: 15px 40px;">Adicionar Receita</a>
+
+            </c:if>
+            <c:if test="${usuarioLogado == null}">
             <a href="cadastro.jsp" class="btn-primary" style="width: auto; padding: 15px 40px;">Criar minha conta</a>
+
+            </c:if>
         </div>
     </header>
     <section class="container">
@@ -43,8 +54,8 @@
                         <div class="card-image" style="background-image: url('${pageContext.request.contextPath}/imagem?nome=${receita.getFoto()}');"></div>
                         <div class="card-info">
                             <h3>${receita.nome}</h3>
-                            <p>${receita.categoria.categoria} - ${receita.tempoPreparo}</p>
-                            <a href="#" class="btn-link">Ver Receita</a>
+                            <p>${receita.categoria.categoria} - ${receita.tempoPreparo} min</p>
+                            <a href="receita?id=${receita.id}" class="btn-link">Ver Receita</a>
                         </div>
                     </div>
                 </c:forEach>
@@ -55,7 +66,7 @@
                         <div class="card-info">
                             <h3>Nenhuma receita cadastrada</h3>
                             <p>Assim que novas receitas forem cadastradas, elas aparecerao aqui.</p>
-                            <a href="cadastro.jsp" class="btn-link">Cadastrar Receita</a>
+                            <a href="adicionar.jsp" class="btn-link">Cadastrar Receita</a>
                         </div>
                     </div>
                 </c:if>
@@ -71,8 +82,8 @@
                             </div>
                             <div class="novidade-texto">
                                 <h3>${ultimaReceita.nome}</h3>
-                                <p>${ultimaReceita.categoria.categoria} - ${ultimaReceita.tempoPreparo}</p><br>
-                                <a href="receitas.jsp" class="btn-primary" style="width: auto;">Ler Passo a Passo</a>
+                                <p>${ultimaReceita.categoria.categoria} - ${ultimaReceita.tempoPreparo} min</p><br>
+                                <a href="receita?id=${ultimaReceita.id}" class="btn-primary" style="width: auto;">Ler Passo a Passo</a>
                             </div>
                         </div>
                     </c:if>
@@ -86,7 +97,7 @@
                             <div class="novidade-texto">
                                 <h3>Nenhuma receita nova ainda</h3>
                                 <p>Cadastre uma nova receita para ela aparecer nesta seção.</p><br>
-                                <a href="cadastro.jsp" class="btn-primary" style="width: auto;">Cadastrar Receita</a>
+                                <a href="adicionar.jsp" class="btn-primary" style="width: auto;">Cadastrar Receita</a>
                             </div>
                         </div>
                     </c:if>
@@ -95,27 +106,30 @@
                 <section class="container">
                     <h2 class="section-title">As Mais Amadas</h2>
                     <div class="recipe-grid">
-                        <div class="recipe-card">
-                            <div class="card-image" style="background-image: url('resources/images/fundochurrasco.png');">
-                                <span class="badge-popular">🔥 Popular</span>
+                        <c:forEach var="receita" items="${receitasMaisVisualizadas}" begin="0" end="2">
+                            <div class="recipe-card">
+                                <div class="card-image" style="background-image: url('${pageContext.request.contextPath}/imagem?nome=${receita.foto}');">
+                                    <span class="badge-popular">🔥 Popular</span>
+                                </div>
+                                <div class="card-info">
+                                    <h3>${receita.nome}</h3>
+                                    <p>${receita.categoria.categoria} - ${receita.tempoPreparo} min</p>
+                                    <p>${receita.visualizacoes} visualizacoes</p>
+                                    <a href="receita?id=${receita.id}" class="btn-link">Ver mais</a>
+                                </div>
                             </div>
-                            <div class="card-info">
-                                <h3>Churrasco de Domingo</h3>
-                                <p>Mais de 5.000 pessoas favoritaram essa receita este mês.</p>
-                                <a href="receitas.jsp" class="btn-link">Ver mais</a>
-                            </div>
-                        </div>
+                        </c:forEach>
 
-                        <div class="recipe-card">
-                            <div class="card-image" style="background-image: url('resources/images/fundobolo.png');">
-                                <span class="badge-popular">🔥 Popular</span>
+                        <c:if test="${empty receitasMaisVisualizadas}">
+                            <div class="recipe-card">
+                                <div class="card-image" style="background-image: url('resources/images/fundoinicial.png');"></div>
+                                <div class="card-info">
+                                    <h3>Nenhuma receita visualizada ainda</h3>
+                                    <p>As receitas mais acessadas aparecerao aqui.</p>
+                                    <a href="receitasCadastradas.jsp" class="btn-link">Ver receitas</a>
+                                </div>
                             </div>
-                            <div class="card-info">
-                                <h3>Bolo Vulcão</h3>
-                                <p>A receita que viralizou nas redes sociais pelo seu recheio cremoso.</p>
-                                <a href="receitas.jsp" class="btn-link">Ver mais</a>
-                            </div>
-                        </div>
+                        </c:if>
                     </div>
                 </section>
 

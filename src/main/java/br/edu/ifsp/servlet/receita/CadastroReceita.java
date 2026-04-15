@@ -3,6 +3,7 @@ package br.edu.ifsp.servlet.receita;
 import br.edu.ifsp.Usuario;
 import br.edu.ifsp.entities.Receita;
 import br.edu.ifsp.enums.Categoria;
+import br.edu.ifsp.exceptions.AcessoNegadoException;
 import br.edu.ifsp.utils.GerenciadorArquivo;
 import br.edu.ifsp.utils.GerenciadorReceita;
 
@@ -40,6 +41,14 @@ public class CadastroReceita extends HttpServlet {
         String ingredientes = request.getParameter("ingredientes");
         String modoPreparo = request.getParameter("modo_preparo");
 
+        try {
+            if (autor == null){
+                throw new AcessoNegadoException("Usuario precisa estar logado para cadastrar a tarefa");
+            }
+        }catch (AcessoNegadoException e){
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
+        }
+
         Part fotoPart = request.getPart("foto");
         String nomeArquivoSalvo = null;
 
@@ -75,8 +84,8 @@ public class CadastroReceita extends HttpServlet {
         gerenciadorReceita.cadastrar(listaReceitas, receita);
         getServletContext().setAttribute("listaReceitas", listaReceitas);
 
-        request.setAttribute("idReceita", receita.getId());
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
+        request.setAttribute("receita", receita);
+        request.getRequestDispatcher("/receita.jsp").forward(request, response);
     }
 
 }

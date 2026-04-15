@@ -2,6 +2,7 @@ package br.edu.ifsp.servlet.usuario;
 
 import br.edu.ifsp.Usuario;
 import br.edu.ifsp.entities.Visitante;
+import br.edu.ifsp.exceptions.AcessoNegadoException;
 import br.edu.ifsp.utils.GerenciadorArquivo;
 import br.edu.ifsp.utils.GerenciadorUsuario;
 
@@ -19,7 +20,7 @@ public class EditarUsuario extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Usuario usuarioEditavel;
+        Usuario usuarioEditavel = null;
         String url = "/logado.jsp";
 
         Usuario usuarioLogado = (Usuario) request.getSession().getAttribute("usuarioLogado");
@@ -32,14 +33,17 @@ public class EditarUsuario extends HttpServlet {
             // pega o usuario pelo ‘id’
             usuarioEditavel = listaUsuario.get(idUsuario);
 
+            // verifica se o usuario existe ou se esta tentando editar informações de outro
+            if (usuarioEditavel == null || usuarioEditavel.getId() != usuarioLogado.getId()){
+                throw new AcessoNegadoException("Acesso negado, nao é possivel alterar informaçoes de outro usuario");
+            }
+
         } catch (NumberFormatException e) {
             throw new RuntimeException(e);
-        }
-
-        // verifica se o usuario existe ou se esta tentando editar informações de outro
-        if (usuarioEditavel == null || usuarioEditavel.getId() != usuarioLogado.getId()){
+        }catch (AcessoNegadoException e){
             url = "/index.jsp";
         }
+
 
         getServletContext().setAttribute("usuarioEditavel", usuarioEditavel);
         getServletContext().getRequestDispatcher(url).forward(request, response);

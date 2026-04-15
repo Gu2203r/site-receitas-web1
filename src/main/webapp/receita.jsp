@@ -1,9 +1,10 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>${receita.titulo} - La Cuisine Brasil</title>
+    <title>${receita.nome} - La Cuisine Brasil</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 </head>
 <body>
@@ -12,9 +13,15 @@
         <div class="logo">La Cuisine <span>Brasil</span></div>
         <ul class="nav-links">
             <li><a href="index.jsp">Início</a></li>
-            <li><a href="visualizar.jsp">Receitas</a></li>
+            <li><a href="receitasCadastradas.jsp">Receitas</a></li>
             <li><a href="sobre.jsp">Sobre</a></li>
-            <li><a href="login.jsp" class="btn-nav-login">Entrar</a></li>
+            <c:if test="${usuarioLogado != null}">
+                <li><a href="logado?id_usuario=${usuarioLogado.getId()}" class="btn-nav-login">${usuarioLogado.getNome()}</a></li>
+                <li><a href="logout" class="btn-nav-logout">Sair</a></li>
+            </c:if>
+            <c:if test="${usuarioLogado == null}">
+                <li><a href="login.jsp" class="btn-nav-login">Entrar</a></li>
+            </c:if>
             <li><a href="index.jsp" class="btn-logout">Sair</a></li>
         </ul>
     </nav>
@@ -22,32 +29,25 @@
     <main class="container">
         <article class="receita-detalhe">
             <header class="receita-header">
-                <h1 class="recipe-title">${receita.titulo}</h1>
+                <h1 class="recipe-title">${receita.nome}</h1>
                 <div class="recipe-meta">
-                    <span class="meta-item">⏱️ ${receita.tempo} min</span>
-                    <span class="meta-item">🍽️ ${receita.porcoes} porções</span>
-                    <span class="meta-item">⭐ Favoritar</span>
+                    <span class="meta-item">⏱️ ${receita.tempoPreparo} min</span>
+                    <span class="meta-item">🍽️ ${receita.rendimento}</span>
+                    <span class="meta-item">🏷️ ${receita.categoria.categoria}</span>
+                    <span class="meta-item">👤 ${receita.autor.nome}</span>
                 </div>
             </header>
 
             <div class="recipe-content">
                 <aside class="recipe-ingredients">
                     <h3>Ingredientes</h3>
-                    <ul>
-                        <c:forEach var="ingrediente" items="${receita.listaIngredientes}">
-                            <li>${ingrediente}</li>
-                        </c:forEach>
-                        <p style="white-space: pre-wrap;">${receita.ingredientes}</p>
-                    </ul>
+                    <p style="white-space: pre-wrap;">${receita.ingredientes}</p>
                 </aside>
 
                 <section class="recipe-steps">
                     <h3>Modo de Preparo</h3>
                     <div class="steps-text">
                         <p>${receita.modoPreparo}</p>
-                    </div>
-                    <div class="recipe-actions">
-                        <button onclick="window.print()" class="btn-secondary">🖨️ Imprimir Receita</button>
                     </div>
                 </section>
             </div><br>
@@ -57,17 +57,17 @@
                             <h3 class="comments-title">Avaliações e Comentários</h3>
 
                             <div class="comentario-form-container">
-                                <form action="ComentarioServlet" method="POST">
+                                <form action="${pageContext.request.contextPath}/avaliacao" method="POST">
                                     <input type="hidden" name="id_receita" value="${receita.id}">
 
                                     <div class="input-group avaliacao-group">
                                         <label>Sua Avaliação</label>
                                         <select name="nota" class="custom-field select-avaliacao" required>
-                                            <option value="5">⭐⭐⭐⭐⭐ (Excelente)</option>
-                                            <option value="4">⭐⭐⭐⭐ (Muito Bom)</option>
-                                            <option value="3">⭐⭐⭐ (Bom)</option>
-                                            <option value="2">⭐⭐ (Regular)</option>
-                                            <option value="1">⭐ (Ruim)</option>
+                                            <option value="5">(Excelente)</option>
+                                            <option value="4">(Muito Bom)</option>
+                                            <option value="3">(Bom)</option>
+                                            <option value="2">(Regular)</option>
+                                            <option value="1">(Ruim)</option>
                                         </select>
                                     </div>
 
@@ -81,13 +81,26 @@
                             </div>
 
                             <div class="comments-list">
-                                <div class="comentario-card">
-                                    <div class="comentario-header">
-                                        <strong>Prof. Avaliador</strong>
-                                        <span>⭐⭐⭐⭐⭐</span>
+                                <c:forEach var="avaliacao" items="${receita.avaliacoes}">
+                                    <div class="comentario-card">
+                                        <div class="comentario-header">
+                                            <strong>
+                                                <c:choose>
+                                                    <c:when test="${avaliacao.avaliador != null}">${avaliacao.avaliador.nome}</c:when>
+                                                    <c:otherwise>Visitante</c:otherwise>
+                                                </c:choose>
+                                            </strong>
+                                            <span>${avaliacao.nota}/5</span>
+                                        </div>
+                                        <p>${avaliacao.comentario}</p>
                                     </div>
-                                    <p>Que projeto incrível! A interface está muito limpa e o sistema de receitas funciona perfeitamente. Parabéns pelo excelente trabalho no La Cuisine Brasil!</p>
-                                </div>
+                                </c:forEach>
+
+                                <c:if test="${empty receita.avaliacoes}">
+                                    <div class="comentario-card">
+                                        <p>Ainda nao ha avaliacoes para esta receita.</p>
+                                    </div>
+                                </c:if>
                             </div>
                         </section>
         </article>

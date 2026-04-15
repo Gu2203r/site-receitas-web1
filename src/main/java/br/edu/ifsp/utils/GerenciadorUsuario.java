@@ -1,12 +1,14 @@
 package br.edu.ifsp.utils;
 
 import br.edu.ifsp.Usuario;
+import br.edu.ifsp.entities.Receita;
 
 import java.util.Map;
 
 public class GerenciadorUsuario {
 
     private GerenciadorArquivo<Usuario> gerenciador = new GerenciadorArquivo();
+    private GerenciadorReceita gerenciadorReceita = new GerenciadorReceita();
     private String userPath = "usuarios.ser";
 
     public void cadastrar(Map<Integer, Usuario> listaUsuarios, Usuario novoUsuario){
@@ -40,7 +42,12 @@ public class GerenciadorUsuario {
         gerenciador.serializar(listaUsuarios, "usuarios.ser");
     }
 
-    public void excluir(Map<Integer, Usuario> listaUsuarios, Usuario usuario){
+    public void excluir(Map<Integer, Usuario> listaUsuarios, Map<Integer, Receita> listaReceitas, Usuario usuario){
+        if (listaUsuarios == null || listaReceitas == null || usuario == null) {
+            return;
+        }
+
+        gerenciadorReceita.excluirPorUsuario(listaReceitas, usuario.getId());
         listaUsuarios.remove(usuario.getId());
         System.out.println("Usuario " + usuario.getId() + " excluido");
 

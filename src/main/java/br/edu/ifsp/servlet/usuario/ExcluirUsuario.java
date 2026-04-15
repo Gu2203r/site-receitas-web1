@@ -1,8 +1,8 @@
 package br.edu.ifsp.servlet.usuario;
 
 import br.edu.ifsp.Usuario;
+import br.edu.ifsp.entities.Receita;
 import br.edu.ifsp.exceptions.AcessoNegadoException;
-import br.edu.ifsp.utils.GerenciadorArquivo;
 import br.edu.ifsp.utils.GerenciadorUsuario;
 
 import javax.servlet.*;
@@ -21,7 +21,7 @@ public class ExcluirUsuario extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Map<Integer, Usuario> listaUsuarios = (HashMap<Integer, Usuario>) getServletContext().getAttribute("listaUsuarios");
-        GerenciadorArquivo gerenciador = new GerenciadorArquivo();
+        Map<Integer, Receita> listaReceitas = (HashMap<Integer, Receita>) getServletContext().getAttribute("listaReceitas");
         Usuario usuarioLogado = (Usuario) request.getSession().getAttribute("usuarioLogado");
 
         try {
@@ -33,17 +33,19 @@ public class ExcluirUsuario extends HttpServlet {
             if (usuarioExcluir == null || usuarioLogado == null || usuarioExcluir.getId() != usuarioLogado.getId()){
                 throw new AcessoNegadoException("Usuario sem permissao");
             }else {
-                gerenciadorUsuario.excluir(listaUsuarios, usuarioExcluir);
+                gerenciadorUsuario.excluir(listaUsuarios, listaReceitas, usuarioExcluir);
             }
 
         } catch (NumberFormatException e) {
             throw new RuntimeException(e);
         } catch (AcessoNegadoException e){
-
+            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
         }
 
         // remove o usuario logado
         request.getSession().removeAttribute("usuarioLogado");
+        getServletContext().setAttribute("listaUsuarios", listaUsuarios);
+        getServletContext().setAttribute("listaReceitas", listaReceitas);
         getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 
     }

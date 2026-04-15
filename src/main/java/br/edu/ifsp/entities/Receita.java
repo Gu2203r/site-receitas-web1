@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Receita implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private static int idAtual = 0;
 
@@ -38,6 +39,10 @@ public class Receita implements Serializable {
         this.visualizacoes = 0;
     }
 
+    public void adicionarVisualizacao(){
+        this.visualizacoes++;
+    }
+
     public static void setIdAtual(int idAtual) {
         Receita.idAtual = idAtual;
     }
@@ -50,6 +55,10 @@ public class Receita implements Serializable {
         return nome;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public Usuario getAutor() {
         return autor;
     }
@@ -58,24 +67,48 @@ public class Receita implements Serializable {
         return tempoPreparo;
     }
 
+    public void setTempoPreparo(String tempoPreparo) {
+        this.tempoPreparo = tempoPreparo;
+    }
+
     public String getIngredientes() {
         return ingredientes;
+    }
+
+    public void setIngredientes(String ingredientes) {
+        this.ingredientes = ingredientes;
     }
 
     public String getModoPreparo() {
         return modoPreparo;
     }
 
+    public void setModoPreparo(String modoPreparo) {
+        this.modoPreparo = modoPreparo;
+    }
+
     public Categoria getCategoria() {
         return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public String getRendimento() {
         return rendimento;
     }
 
+    public void setRendimento(String rendimento) {
+        this.rendimento = rendimento;
+    }
+
     public String getFoto() {
         return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public List<Avaliacao> getAvaliacoes() {
