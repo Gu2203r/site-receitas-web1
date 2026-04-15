@@ -5,12 +5,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Cadastro - ReceitaMaster</title>
-    <link rel="stylesheet" href="./resources/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 </head>
 <body class="bg-cadastro">
 
     <div class="container-auth">
         <div class="auth-card">
+
             <h2>Criar Conta</h2>
 
             <c:if test="${not empty msgRegistro}">
@@ -41,11 +42,15 @@
             <p style="margin-top:20px; font-size:14px;">
                 Já tem uma conta? <a href="login.jsp" style="color:#E67E22; text-decoration:none; font-weight:bold;">Entrar</a>
             </p>
+             <a href="index.jsp" class="btn-voltar">
+                <span class="icon-seta">←</span>
+                <span>Voltar para a Home</span>
+             </a>
         </div>
     </div>
 
     <footer style="background: #2b1506; color: white; text-align: center; padding: 40px 0; margin-top: 50px;">
-         <p>&copy; 2026 La Cuisine Brasi - Todos os direitos reservados.</p>
+         <p>&copy; 2026 La Cuisine Brasil - Todos os direitos reservados.</p>
          <p style="font-size: 12px; color: #888; margin-top: 10px;">Feito por Gustavo e Laura</p>
     </footer>
 

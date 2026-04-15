@@ -17,8 +17,8 @@
         <div class="logo">La Cuisine Brasil</div>
         <ul class="nav-links">
             <li><a href="index.jsp">Início</a></li>
-            <li><a href="#">Receitas</a></li>
-            <li><a href="#">Sobre</a></li>
+            <li><a href="receitas.jsp">Receitas</a></li>
+            <li><a href="sobre.jsp">Sobre</a></li>
             <c:if test="${usuarioLogado != null}">
                 <li><a href="logado?id_usuario=${usuarioLogado.getId()}" class="btn-nav-login">${usuarioLogado.getNome()}</a></li>
             </c:if>
@@ -55,7 +55,7 @@
                         <div class="card-info">
                             <h3>Nenhuma receita cadastrada</h3>
                             <p>Assim que novas receitas forem cadastradas, elas aparecerao aqui.</p>
-                            <a href="cadastroReceita.jsp" class="btn-link">Cadastrar Receita</a>
+                            <a href="cadastro.jsp" class="btn-link">Cadastrar Receita</a>
                         </div>
                     </div>
                 </c:if>
@@ -85,8 +85,8 @@
                             </div>
                             <div class="novidade-texto">
                                 <h3>Nenhuma receita nova ainda</h3>
-                                <p>Cadastre uma nova receita para ela aparecer nesta seção.</p>
-                                <a href="cadastroReceita.jsp" class="btn-primary" style="width: auto;">Cadastrar Receita</a>
+                                <p>Cadastre uma nova receita para ela aparecer nesta seção.</p><br>
+                                <a href="cadastro.jsp" class="btn-primary" style="width: auto;">Cadastrar Receita</a>
                             </div>
                         </div>
                     </c:if>
@@ -102,7 +102,7 @@
                             <div class="card-info">
                                 <h3>Churrasco de Domingo</h3>
                                 <p>Mais de 5.000 pessoas favoritaram essa receita este mês.</p>
-                                <a href="#" class="btn-link">Ver mais</a>
+                                <a href="receitas.jsp" class="btn-link">Ver mais</a>
                             </div>
                         </div>
 
@@ -113,7 +113,7 @@
                             <div class="card-info">
                                 <h3>Bolo Vulcão</h3>
                                 <p>A receita que viralizou nas redes sociais pelo seu recheio cremoso.</p>
-                                <a href="#" class="btn-link">Ver mais</a>
+                                <a href="receitas.jsp" class="btn-link">Ver mais</a>
                             </div>
                         </div>
                     </div>

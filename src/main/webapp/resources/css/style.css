@@ -139,8 +139,14 @@ html, body {
      color: white;
  }
 
- .logo { font-size: 1.5rem; font-weight: bold; }
- .logo span { color: #E67E22; }
+ .logo {
+ font-size: 1.5rem;
+ font-weight: bold;
+ color: #E67E22;
+ }
+
+ .logo span {
+  color: #E67E22; }
 
  .nav-links a {
   color: white;
@@ -320,10 +326,18 @@ html, body {
      display: flex;
      gap: 20px;
      width: 100%;
+     margin-bottom: 20px;
+     flex-wrap: wrap;
+ }
+
+ .row-group .input-group {
+     flex: 1;
+     min-width: 180px;
  }
 
  .custom-field {
      width: 100%;
+     box-sizing: border-box;
      padding: 12px;
      border-radius: 5px;
      background: #3d1a06;
@@ -402,63 +416,52 @@ html, body {
 
  .btn-delete:hover { color: #a93226; text-decoration: underline; }
 
-/* Container para alinhar o botão à esquerda no topo do card */
 .header-auth-card {
     width: 100%;
     display: flex;
-    justify-content: flex-start; /* Alinha à esquerda */
-    margin-bottom: 25px; /* Espaço para o título <h2> abaixo */
+    justify-content: flex-start;
+    margin-bottom: 25px;
 }
 
-/* O Botão Premium de Voltar */
 .btn-voltar {
     display: inline-flex;
     align-items: center;
-    gap: 10px; /* Espaço entre o ícone e o texto */
+    gap: 10px;
 
-    /* Cores e Bordas - Estilo "Ghost" */
     background: transparent;
-    border: 2px solid #E67E22; /* Laranja vibrante */
-    color: #E67E22; /* Texto Laranja */
+    border: 2px solid #E67E22;
+    color: #E67E22;
 
-    /* Formato e Espaçamento */
     padding: 8px 18px;
-    border-radius: 50px; /* Bem arredondado (estilo pílula) */
+    border-radius: 50px;
 
-    /* Tipografia */
     text-decoration: none;
     font-size: 13px;
     font-weight: 600;
-    text-transform: uppercase; /* Letras maiúsculas para dar imponência */
-    letter-spacing: 1px; /* Espaçamento entre letras elegante */
+    text-transform: uppercase;
+    letter-spacing: 1px;
 
-    /* Animação Suave */
     transition: all 0.3s ease-in-out;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(230, 126, 34, 0.1); /* Sombra laranja bem leve */
+    box-shadow: 0 2px 5px rgba(230, 126, 34, 0.1);
 }
 
-/* O Ícone da Seta */
 .btn-voltar .icon-seta {
     font-size: 18px;
     font-weight: bold;
     transition: transform 0.3s ease;
 }
 
-/* --- EFEITO DE HOVER (Mágica do Front-end) --- */
 .btn-voltar:hover {
-    background-color: #E67E22; /* Preenche com laranja */
-    color: white; /* Texto vira branco */
-    box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3); /* Sombra laranja mais forte */
-    transform: translateY(-2px); /* Eleva o botão levemente */
+    background-color: #E67E22;
+    color: white;
+    box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
+    transform: translateY(-2px);
 }
 
-/* Efeito na seta ao passar o mouse */
 .btn-voltar:hover .icon-seta {
-    transform: translateX(-4px); /* A seta "empurra" para a esquerda */
+    transform: translateX(-4px);
 }
-
-
 
 .sobre-wrapper {
     max-width: 850px;
@@ -527,7 +530,7 @@ html, body {
     }
 }
 
-/* --- Página de Detalhes da Receita --- */
+
 .receita-detalhe {
     background: #fff;
     padding: 40px;
@@ -619,3 +622,4 @@ html, body {
     background: #2b1506;
     color: #fff;
 }
+

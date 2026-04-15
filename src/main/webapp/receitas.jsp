@@ -15,6 +15,7 @@
             <li><a href="visualizar.jsp">Receitas</a></li>
             <li><a href="sobre.jsp">Sobre</a></li>
             <li><a href="login.jsp" class="btn-nav-login">Entrar</a></li>
+            <li><a href="index.jsp" class="btn-logout">Sair</a></li>
         </ul>
     </nav>
 
@@ -45,18 +46,56 @@
                     <div class="steps-text">
                         <p>${receita.modoPreparo}</p>
                     </div>
-
                     <div class="recipe-actions">
                         <button onclick="window.print()" class="btn-secondary">🖨️ Imprimir Receita</button>
                     </div>
                 </section>
-            </div>
+            </div><br>
+            <hr class="divisor-comentarios">
+
+                        <section class="recipe-comments">
+                            <h3 class="comments-title">Avaliações e Comentários</h3>
+
+                            <div class="comentario-form-container">
+                                <form action="ComentarioServlet" method="POST">
+                                    <input type="hidden" name="id_receita" value="${receita.id}">
+
+                                    <div class="input-group avaliacao-group">
+                                        <label>Sua Avaliação</label>
+                                        <select name="nota" class="custom-field select-avaliacao" required>
+                                            <option value="5">⭐⭐⭐⭐⭐ (Excelente)</option>
+                                            <option value="4">⭐⭐⭐⭐ (Muito Bom)</option>
+                                            <option value="3">⭐⭐⭐ (Bom)</option>
+                                            <option value="2">⭐⭐ (Regular)</option>
+                                            <option value="1">⭐ (Ruim)</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <label>Seu Comentário</label>
+                                        <textarea name="comentario" class="custom-field textarea field-comentario" rows="3" placeholder="Conte para a comunidade o que achou desta receita..." required></textarea>
+                                    </div>
+
+                                    <button type="submit" class="btn-primary btn-comentar">Publicar Avaliação</button>
+                                </form>
+                            </div>
+
+                            <div class="comments-list">
+                                <div class="comentario-card">
+                                    <div class="comentario-header">
+                                        <strong>Prof. Avaliador</strong>
+                                        <span>⭐⭐⭐⭐⭐</span>
+                                    </div>
+                                    <p>Que projeto incrível! A interface está muito limpa e o sistema de receitas funciona perfeitamente. Parabéns pelo excelente trabalho no La Cuisine Brasil!</p>
+                                </div>
+                            </div>
+                        </section>
         </article>
     </main>
 
-    <footer class="main-footer">
-        <p>&copy; 2026 La Cuisine Brasil - Todos os direitos reservados.</p>
-        <p class="signature">Feito por Gustavo e Laura</p>
+    <footer style="background: #2b1506; color: white; text-align: center; padding: 40px 0; margin-top: 50px;">
+       <p>&copy; 2026 La Cuisine Brasil - Todos os direitos reservados.</p>
+       <p style="font-size: 12px; color: #888; margin-top: 10px;">Feito por Gustavo e Laura</p>
     </footer>
 
 </body>
