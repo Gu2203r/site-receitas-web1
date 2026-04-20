@@ -10,20 +10,19 @@
 <body class="bg-login">
 
     <nav class="navbar">
+        <a href="index.jsp"><div class="logo">La Cuisine Brasil</div></a>
         <ul class="nav-links">
             <li><a href="index.jsp">Home</a></li>
-            <li><a href="adicionar.jsp">Adicionar receitas</a></li>
-            <li><a href="perfil.jsp">Configurações pessoais</a></li>
-            <li><a href="visualizar.jsp">Visualizar receitas</a></li>
+            <li><a href="AdicionarReceita.jsp">Adicionar receitas</a></li>
+            <li><a href="MinhasReceitas.jsp">Visualizar receitas</a></li>
         </ul>
 
         <div class="search-container">
             <input type="text" placeholder="Pesquisar">
-            <span class="search-icon">🔍</span>
         </div>
 
         <ul class="nav-links">
-            <li><a href="#">Sobre o sistema</a></li>
+            <li><a href="SobreNos.jsp">Sobre o sistema</a></li>
             <c:if test="${usuarioLogado != null}">
                 <li><a href="logado?id_usuario=${usuarioLogado.getId()}" class="btn-nav-login">${usuarioLogado.getNome()}</a></li>
                 <li><a href="logout" class="btn-nav-logout">Sair</a></li>

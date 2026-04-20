@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -10,12 +9,13 @@
 <body>
 
     <nav class="navbar">
-        <div class="logo">La Cuisine <span>Brasil</span></div>
+         <a href="index.jsp"><div class="logo">La Cuisine Brasil</div></a>
         <ul class="nav-links">
-            <li><a href="index.jsp">Início</a></li>
+            <li><a href="index.jsp">Home</a></li>
             <li><a href="receitasCadastradas.jsp">Receitas</a></li>
-            <li><a href="sobre.jsp">Sobre</a></li>
+            <li><a href="SobreNos.jsp">Sobre</a></li>
             <li><a href="login.jsp" class="btn-nav-login">Entrar</a></li>
+            <li><a href="index.jsp" class="btn-logout">Sair</a></li>
         </ul>
     </nav>
 

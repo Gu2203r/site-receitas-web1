@@ -7,19 +7,21 @@
     <title>Configurações Pessoais - La Cuisine Brasil</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 </head>
-<body class="bg-login"> <nav class="navbar">
+<body class="bg-login">
+<nav class="navbar">
+ <a href="index.jsp"><div class="logo">La Cuisine Brasil</div></a>
         <ul class="nav-links">
             <li><a href="index.jsp">Home</a></li>
             <li><a href="adicionar.jsp">Adicionar receitas</a></li>
-            <li><a href="perfil.jsp">Configurações pessoais</a></li>
             <li><a href="visualizar.jsp">Visualizar receitas</a></li>
-        </ul>
-        <div class="search-container">
-            <input type="text" placeholder="Pesquisar">
-            <span class="search-icon">🔍</span>
-        </div>
+            <li><a href="index.jsp" class="btn-logout">Sair</a></li>
+
+        </ul><br>
+       <form action="BuscaServlet" method="GET" class="search-container">
+           <input type="text" name="query" placeholder="Pesquisar receitas..." required>
+       </form>
         <ul class="nav-links">
-            <li><a href="#">Sobre o sistema</a></li>
+            <li><a href="sobre.jsp">Sobre o sistema</a></li>
         </ul>
     </nav>
 
@@ -57,6 +59,7 @@
                              <span class="icon-seta">←</span>
                              <span>Voltar para a Home</span>
                         </a>
+
                     </form>
                 </div>
             </div>

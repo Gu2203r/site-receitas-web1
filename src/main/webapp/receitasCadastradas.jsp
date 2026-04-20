@@ -9,6 +9,7 @@
 </head>
 <body class="page-shell" style="background: #f4f4f4;">
     <nav class="navbar">
+     <a href="index.jsp"><div class="logo">La Cuisine Brasil</div></a>
         <ul class="nav-links">
             <li><a href="index.jsp">Home</a></li>
             <li><a href="receitasCadastradas.jsp">Receitas cadastradas</a></li>
@@ -21,10 +22,10 @@
         </form>
 
         <ul class="nav-links">
-            <li><a href="sobre.jsp">Sobre o sistema</a></li>
+            <li><a href="SobreNos.jsp">Sobre o sistema</a></li>
             <c:if test="${usuarioLogado != null}">
-                <li><a href="adicionar.jsp">Cadastrar Receita</a></li>
-                <li><a href="visualizar.jsp">Minhas Receitas</a></li>
+                <li><a href="AdicionarReceita.jsp">Cadastrar Receita</a></li>
+                <li><a href="MinhasReceitas.jsp">Minhas Receitas</a></li>
                 <li><a href="logado?id_usuario=${usuarioLogado.getId()}" class="btn-nav-login">${usuarioLogado.getNome()}</a></li>
                 <li><a href="logout" class="btn-nav-logout">Sair</a></li>
             </c:if>
@@ -38,7 +39,7 @@
         <section class="container" style="margin-top: 40px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
                 <h2 style="color: #2b1506;">Receitas Cadastradas</h2>
-                <a href="adicionar.jsp" class="btn-primary" style="width: auto; padding: 10px 25px;">+ Nova Receita</a>
+                <a href="AdicionarReceita.jsp" class="btn-primary" style="width: auto; padding: 10px 25px;">+ Nova Receita</a>
             </div>
 
             <div class="recipe-grid">
@@ -75,7 +76,7 @@
                         <div class="card-info">
                             <h3>Nenhuma receita cadastrada</h3>
                             <p>Cadastre uma receita para ela aparecer aqui.</p>
-                            <a href="adicionar.jsp" class="btn-link">Cadastrar receita</a>
+                            <a href="AdicionarReceita.jsp" class="btn-link">Cadastrar receita</a>
                         </div>
                     </div>
                 </c:if>
