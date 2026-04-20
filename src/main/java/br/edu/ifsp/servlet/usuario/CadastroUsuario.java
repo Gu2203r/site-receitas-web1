@@ -41,7 +41,7 @@ public class CadastroUsuario extends HttpServlet {
 
         if (gerenciadorUsuario.verificarEmail(listaUsuarios, email)) {
             msgRegistro = "Email ja cadastrado";
-            url = "/cadastro.jsp";
+            url = "/CadastroCliente.jsp";
         }
         // cadastra o usuario caso ele nao exista
         if (msgRegistro == null){

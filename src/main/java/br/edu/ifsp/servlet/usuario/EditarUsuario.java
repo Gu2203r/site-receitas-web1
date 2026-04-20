@@ -21,7 +21,7 @@ public class EditarUsuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Usuario usuarioEditavel = null;
-        String url = "/logado.jsp";
+        String url = "/UsuarioLogado.jsp";
 
         Usuario usuarioLogado = (Usuario) request.getSession().getAttribute("usuarioLogado");
 
@@ -68,7 +68,7 @@ public class EditarUsuario extends HttpServlet {
         if (!novoEmail.equals(usuarioEditavel.getEmail())){
             if (gerenciadorUsuario.verificarEmail(listaUsuarios, novoEmail)) {
                 existe = true;
-                url = "/logado.jsp";
+                url = "/UsuarioLogado.jsp";
                 msgErro = "Já existe um usuário com esse email";
                 System.out.println("Já existe um usuário com esse email");
             }
