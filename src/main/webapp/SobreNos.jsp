@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -9,13 +10,23 @@
 <body>
 
     <nav class="navbar">
-         <a href="index.jsp"><div class="logo">La Cuisine Brasil</div></a>
+        <a href="index.jsp"><div class="logo">La Cuisine Brasil</div></a>
+        <form action="pesquisa" method="post" class="search-container">
+            <input type="text" name="query" placeholder="Pesquisar receitas..." required>
+        </form>
         <ul class="nav-links">
             <li><a href="index.jsp">Home</a></li>
-            <li><a href="receitasCadastradas.jsp">Receitas</a></li>
-            <li><a href="SobreNos.jsp">Sobre</a></li>
-            <li><a href="login.jsp" class="btn-nav-login">Entrar</a></li>
-            <li><a href="index.jsp" class="btn-logout">Sair</a></li>
+            <li><a href="receitasCadastradas.jsp">Receitas</a>
+            <li><a href="SobreNos.jsp">Sobre o sistema</a></li>
+            <c:if test="${usuarioLogado != null}">
+                <li><a href="AdicionarReceita.jsp">Cadastrar Receita</a></li>
+                <li><a href="MinhasReceitas.jsp">Minhas Receitas</a></li>
+                <li><a href="logado?id_usuario=${usuarioLogado.getId()}" class="btn-nav-login">${usuarioLogado.getNome()}</a></li>
+                <li><a href="logout" class="btn-nav-logout">Sair</a></li>
+            </c:if>
+            <c:if test="${usuarioLogado == null}">
+                <li><a href="login.jsp" class="btn-nav-login">Entrar</a></li>
+            </c:if>
         </ul>
     </nav>
 

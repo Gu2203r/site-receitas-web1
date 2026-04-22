@@ -9,19 +9,13 @@
 </head>
 <body class="page-shell" style="background: #f4f4f4;">
     <nav class="navbar">
-     <a href="index.jsp"><div class="logo">La Cuisine Brasil</div></a>
+        <a href="index.jsp"><div class="logo">La Cuisine Brasil</div></a>
+        <form action="pesquisa" method="post" class="search-container">
+            <input type="text" name="query" placeholder="Pesquisar receitas..." required>
+        </form>
         <ul class="nav-links">
             <li><a href="index.jsp">Home</a></li>
-            <li><a href="receitasCadastradas.jsp">Receitas cadastradas</a></li>
-
-        </ul>
-
-        <form class="search-container" action="${pageContext.request.contextPath}/pesquisa" method="post">
-            <input type="text" name="receita_busca" placeholder="Pesquisar" aria-label="Pesquisar receitas">
-            <button type="submit" class="search-icon" style="background: none; border: none; cursor: pointer;">Buscar</button>
-        </form>
-
-        <ul class="nav-links">
+            <li><a href="receitasCadastradas.jsp">Receitas</a>
             <li><a href="SobreNos.jsp">Sobre o sistema</a></li>
             <c:if test="${usuarioLogado != null}">
                 <li><a href="AdicionarReceita.jsp">Cadastrar Receita</a></li>

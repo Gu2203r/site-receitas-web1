@@ -8,25 +8,20 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 </head>
 <body class="page-shell" style="background: #f4f4f4;">
-    <nav class="navbar">
     <jsp:useBean id="gerenciadorReceita" class="br.edu.ifsp.utils.GerenciadorReceita" scope="page" />
     <c:if test="${sessionScope.usuarioLogado != null}">
         <c:set var="listaReceitasUsuario" value="${gerenciadorReceita.buscarPorUsuario(applicationScope.listaReceitas, sessionScope.usuarioLogado.id)}"/>
     </c:if>
 
-
+    <nav class="navbar">
+        <a href="index.jsp"><div class="logo">La Cuisine Brasil</div></a>
+        <form action="pesquisa" method="post" class="search-container">
+            <input type="text" name="query" placeholder="Pesquisar receitas..." required>
+        </form>
         <ul class="nav-links">
             <li><a href="index.jsp">Home</a></li>
-            <li><a href="AdicionarReceita.jsp">Adicionar receitas</a></li>
-            <li><a href="receitasCadastradas.jsp">Visualizar receitas</a></li>
-        </ul>
-
-        <div class="search-container">
-            <input type="text" placeholder="Pesquisar">
-        </div>
-
-        <ul class="nav-links">
-            <li><a href="sobre.jsp">Sobre o sistema</a></li>
+            <li><a href="receitasCadastradas.jsp">Receitas</a>
+            <li><a href="SobreNos.jsp">Sobre o sistema</a></li>
             <c:if test="${usuarioLogado != null}">
                 <li><a href="AdicionarReceita.jsp">Cadastrar Receita</a></li>
                 <li><a href="MinhasReceitas.jsp">Minhas Receitas</a></li>

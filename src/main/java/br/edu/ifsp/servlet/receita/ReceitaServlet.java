@@ -18,7 +18,7 @@ public class ReceitaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Receita receita;
         String url = "/receita.jsp";
-
+        
         try {
             int idReceita = Integer.parseInt(request.getParameter("id"));
             Map<Integer, Receita> listaReceitas = (Map<Integer, Receita>) getServletContext().getAttribute("listaReceitas");

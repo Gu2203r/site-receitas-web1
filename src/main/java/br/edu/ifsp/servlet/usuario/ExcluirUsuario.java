@@ -39,7 +39,7 @@ public class ExcluirUsuario extends HttpServlet {
         } catch (NumberFormatException e) {
             throw new RuntimeException(e);
         } catch (AcessoNegadoException e){
-            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+            throw e;
         }
 
         // remove o usuario logado

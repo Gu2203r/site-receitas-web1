@@ -54,7 +54,7 @@ public class EditarReceita extends HttpServlet {
         } catch (NumberFormatException e) {
             url = "/404.jsp";
         } catch (AcessoNegadoException e) {
-            url = "/index.jsp";
+            throw e;
         }
 
         getServletContext().setAttribute("receitaEditavel", receitaEditavel);
@@ -137,7 +137,7 @@ public class EditarReceita extends HttpServlet {
         } catch (NumberFormatException e) {
             url = "/404.jsp";
         } catch (AcessoNegadoException e) {
-            url = "/index.jsp";
+            throw e;
         }
 
         request.getRequestDispatcher(url).forward(request, response);

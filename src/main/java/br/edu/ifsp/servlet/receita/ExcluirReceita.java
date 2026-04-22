@@ -46,7 +46,7 @@ public class ExcluirReceita extends HttpServlet {
         } catch (NumberFormatException e) {
             url = "/404.jsp";
         } catch (AcessoNegadoException e) {
-            url = "/index.jsp";
+            throw e;
         }
 
         request.getRequestDispatcher(url).forward(request, response);

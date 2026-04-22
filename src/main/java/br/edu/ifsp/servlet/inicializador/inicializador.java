@@ -7,6 +7,7 @@ import br.edu.ifsp.utils.GerenciadorArquivo;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
+import java.io.File;
 import java.util.Map;
 
 @WebListener
@@ -15,6 +16,13 @@ public class inicializador implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         System.out.println("Carregando dados");
+
+        String caminhoProjeto = sce.getServletContext().getRealPath("/");
+        int posicao = caminhoProjeto.indexOf("src");
+
+        String caminhoReal = caminhoProjeto.substring(0, posicao);
+        GerenciadorArquivo.setCaminhoPasta(caminhoReal + "data" + File.separator);
+        System.out.println();
 
         // listas e caminhos onde as informações estão/serão armazenadas
         Map<Integer, Usuario> listaUsuarios;
@@ -46,7 +54,6 @@ public class inicializador implements ServletContextListener {
             }
         }
         Receita.setIdAtual(maiorIdEncontrado);
-
 
         sce.getServletContext().setAttribute("listaUsuarios", listaUsuarios);
         sce.getServletContext().setAttribute("listaReceitas", listaReceitas);

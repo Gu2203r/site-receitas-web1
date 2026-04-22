@@ -34,7 +34,7 @@
                 <button type="submit" class="btn-primary">Acessar Conta</button>
             </form>
             <p style="margin-top:20px; font-size:14px;">
-                Novo por aqui? <a href="cadastro.jsp" style="color:#E67E22; text-decoration:none;">Cadastre-se</a>
+                Novo por aqui? <a href="CadastroCliente.jsp" style="color:#E67E22; text-decoration:none;">Cadastre-se</a>
             </p>
 
              <a href="index.jsp" class="btn-voltar">

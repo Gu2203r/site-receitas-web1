@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class GerenciadorArquivo<T> {
 
-    private String caminhoPasta = System.getProperty("user.home") + File.separator + "site_receita_data" + File.separator;
+    private static String caminhoPasta = "";
 
     public void serializar(Map<Integer, T> lista, String path){
         try (FileOutputStream fos = new FileOutputStream(caminhoPasta + path);
@@ -38,6 +38,10 @@ public class GerenciadorArquivo<T> {
         }
 
         return lista;
+    }
+
+    public static void setCaminhoPasta(String caminhoPasta) {
+        GerenciadorArquivo.caminhoPasta = caminhoPasta;
     }
 
     public String getCaminhoPasta() {

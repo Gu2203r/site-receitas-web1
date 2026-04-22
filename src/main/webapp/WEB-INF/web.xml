@@ -5,4 +5,9 @@
     <error-code>404</error-code>
     <location>/404.jsp</location>
   </error-page>
+
+  <error-page>
+    <exception-type>br.edu.ifsp.exceptions.AcessoNegadoException</exception-type>
+    <location>/acessoNegado.jsp</location>
+  </error-page>
 </web-app>

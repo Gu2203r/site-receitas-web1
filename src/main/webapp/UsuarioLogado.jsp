@@ -8,20 +8,24 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 </head>
 <body class="bg-login">
-<nav class="navbar">
- <a href="index.jsp"><div class="logo">La Cuisine Brasil</div></a>
+    <nav class="navbar">
+        <a href="index.jsp"><div class="logo">La Cuisine Brasil</div></a>
+        <form action="pesquisa" method="post" class="search-container">
+            <input type="text" name="query" placeholder="Pesquisar receitas..." required>
+        </form>
         <ul class="nav-links">
             <li><a href="index.jsp">Home</a></li>
-            <li><a href="adicionar.jsp">Adicionar receitas</a></li>
-            <li><a href="visualizar.jsp">Visualizar receitas</a></li>
-            <li><a href="index.jsp" class="btn-logout">Sair</a></li>
-
-        </ul><br>
-       <form action="BuscaServlet" method="GET" class="search-container">
-           <input type="text" name="query" placeholder="Pesquisar receitas..." required>
-       </form>
-        <ul class="nav-links">
-            <li><a href="sobre.jsp">Sobre o sistema</a></li>
+            <li><a href="receitasCadastradas.jsp">Receitas</a>
+            <li><a href="SobreNos.jsp">Sobre o sistema</a></li>
+            <c:if test="${usuarioLogado != null}">
+                <li><a href="AdicionarReceita.jsp">Cadastrar Receita</a></li>
+                <li><a href="MinhasReceitas.jsp">Minhas Receitas</a></li>
+                <li><a href="logado?id_usuario=${usuarioLogado.getId()}" class="btn-nav-login">${usuarioLogado.getNome()}</a></li>
+                <li><a href="logout" class="btn-nav-logout">Sair</a></li>
+            </c:if>
+            <c:if test="${usuarioLogado == null}">
+                <li><a href="login.jsp" class="btn-nav-login">Entrar</a></li>
+            </c:if>
         </ul>
     </nav>
 

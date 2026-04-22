@@ -41,7 +41,7 @@ public class EditarUsuario extends HttpServlet {
         } catch (NumberFormatException e) {
             throw new RuntimeException(e);
         }catch (AcessoNegadoException e){
-            url = "/index.jsp";
+            throw e;
         }
 
 

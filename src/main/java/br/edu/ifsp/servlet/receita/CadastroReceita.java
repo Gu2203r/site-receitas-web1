@@ -46,7 +46,7 @@ public class CadastroReceita extends HttpServlet {
                 throw new AcessoNegadoException("Usuario precisa estar logado para cadastrar a tarefa");
             }
         }catch (AcessoNegadoException e){
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+            throw e;
         }
 
         Part fotoPart = request.getPart("foto");
