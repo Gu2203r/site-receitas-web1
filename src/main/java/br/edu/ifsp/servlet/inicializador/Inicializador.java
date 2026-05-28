@@ -5,13 +5,12 @@ import br.edu.ifsp.entities.Receita;
 import br.edu.ifsp.utils.GerenciadorArquivo;
 
 import javax.servlet.*;
-import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.File;
 import java.util.Map;
 
 @WebListener
-public class inicializador implements ServletContextListener {
+public class Inicializador implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {

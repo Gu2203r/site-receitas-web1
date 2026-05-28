@@ -17,7 +17,7 @@
     <nav class="navbar">
         <a href="index.jsp"><div class="logo">La Cuisine Brasil</div></a>
         <form action="pesquisa" method="post" class="search-container">
-            <input type="text" name="query" placeholder="Pesquisar receitas..." required>
+            <input type="text" name="receita_busca" placeholder="Pesquisar receitas..." required>
         </form>
         <ul class="nav-links">
             <li><a href="index.jsp">Home</a></li>

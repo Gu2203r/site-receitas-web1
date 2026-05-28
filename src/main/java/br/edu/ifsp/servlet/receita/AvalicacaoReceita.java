@@ -56,7 +56,7 @@ public class AvalicacaoReceita extends HttpServlet {
         }catch (AcessoNegadoException e){
             throw e;
         }
-        
+
         getServletContext().setAttribute("listaReceitas", listaReceitas);
         response.sendRedirect(request.getContextPath() + "/receita?id=" + idReceita);
     }

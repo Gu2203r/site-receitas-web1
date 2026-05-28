@@ -1,7 +1,6 @@
 package br.edu.ifsp.servlet.usuario;
 
 import br.edu.ifsp.Usuario;
-import br.edu.ifsp.entities.Visitante;
 import br.edu.ifsp.exceptions.AcessoNegadoException;
 import br.edu.ifsp.utils.GerenciadorArquivo;
 import br.edu.ifsp.utils.GerenciadorUsuario;

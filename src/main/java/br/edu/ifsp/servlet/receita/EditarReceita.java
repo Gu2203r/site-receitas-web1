@@ -25,11 +25,6 @@ public class EditarReceita extends HttpServlet {
     private final GerenciadorReceita gerenciadorReceita = new GerenciadorReceita();
     private final GerenciadorArquivo<Receita> gerenciadorArquivo = new GerenciadorArquivo<>();
 
-    @SuppressWarnings("unchecked")
-    private Map<Integer, Receita> getListaReceitas() {
-        return (Map<Integer, Receita>) getServletContext().getAttribute("listaReceitas");
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String url = "/editarReceita.jsp";

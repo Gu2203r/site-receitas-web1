@@ -45,7 +45,6 @@ public class ExcluirUsuario extends HttpServlet {
         // remove o usuario logado
         request.getSession().removeAttribute("usuarioLogado");
         getServletContext().setAttribute("listaUsuarios", listaUsuarios);
-        getServletContext().setAttribute("listaReceitas", listaReceitas);
         getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 
     }
